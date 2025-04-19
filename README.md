@@ -15,8 +15,7 @@ Thanks to TMDB for providing an awesome API that powers this project 🤠
 
 ## 🎬 Preview
 
-[https://github.com/Jnobel/StreamFlix/blob/main/Preview.mp4](https://github.com/user-attachments/assets/9ff80f7f-15eb-4296-a6a0-9865d074c348
-)
+https://github.com/Jnobel/StreamFlix/discussions/2#discussion-8221212
 ---
 
 ## 🚀 Running the Project

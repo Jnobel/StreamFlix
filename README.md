@@ -15,7 +15,7 @@ Thanks to TMDB for providing an awesome API that powers this project 🤠
 
 ## 🎬 Preview
 
-https://user-images.githubusercontent.com/39162820/204163672-1aa8cd68-76a6-47b3-a6dd-89444522193e.mp4
+
 
 ---
 

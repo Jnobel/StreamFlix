@@ -1,11 +1,14 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, useColorScheme } from "react-native";
 import TVShow from "../types/TVShow";
 import TVCard from "./TVCard";
 
 function TVSection({ shows, sectionTitle }: { shows: TVShow[], sectionTitle: string }) {
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
+
   return (
     <View>
-      <Text style={styles.sectionTitle}>{sectionTitle}</Text>
+      <Text style={isLightTheme ? styles.lightSectionTitle : styles.darkSectionTitle}>{sectionTitle}</Text>
       <FlatList
         data={shows}
         horizontal
@@ -20,7 +23,14 @@ function TVSection({ shows, sectionTitle }: { shows: TVShow[], sectionTitle: str
 }
 
 const styles = StyleSheet.create({
-  sectionTitle: {
+  lightSectionTitle: {
+    color: "#000",
+    fontSize: 22,
+    fontWeight: "700",
+    marginLeft: 12,
+    marginBottom: 6,
+  },
+  darkSectionTitle: {
     color: "#FFF",
     fontSize: 22,
     fontWeight: "700",

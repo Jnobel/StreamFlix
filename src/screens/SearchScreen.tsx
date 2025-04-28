@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   View,
+  useColorScheme,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { TMDB_API_KEY, BASE_URL } from "../constants";
@@ -18,6 +19,9 @@ function SearchScreen() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
 
   useEffect(() => {
     const controller = new AbortController();
@@ -65,7 +69,7 @@ function SearchScreen() {
     if (loading) {
       return (
         <View style={styles.mainContentView}>
-          <Text style={styles.mainContentText}>Loading...</Text>
+          <Text style={isLightTheme ? styles.lightMainContentText : styles.darkMainContentText}>Loading...</Text>
         </View>
       );
     }
@@ -73,7 +77,7 @@ function SearchScreen() {
     if (!search) {
       return (
         <View style={styles.mainContentView}>
-          <Text style={styles.mainContentText}>
+          <Text style={isLightTheme ? styles.lightMainContentText : styles.darkMainContentText}>
             Search for a movie, or Tv show...
           </Text>
         </View>
@@ -97,14 +101,14 @@ function SearchScreen() {
 
     return (
       <View style={styles.mainContentView}>
-        <Text style={styles.mainContentText}>Sorry, nothing was found for</Text>
-        <Text style={styles.mainContentText}>"{search}"</Text>
+        <Text style={isLightTheme ? styles.lightMainContentText : styles.darkMainContentText}>Sorry, nothing was found for</Text>
+        <Text style={isLightTheme ? styles.lightMainContentText : styles.darkMainContentText}>"{search}"</Text>
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View style={isLightTheme ? styles.lightContainer : styles.darkContainer}>
       <View style={styles.header}>
         <Image
           source={tmdbLogo}
@@ -112,19 +116,19 @@ function SearchScreen() {
           style={styles.logo}
         />
 
-        <View style={styles.searchBox}>
+        <View style={isLightTheme ? styles.lightSearchBox : styles.darkSearchBox}>
           <Ionicons
             name="ios-search-sharp"
             size={34}
-            color="#C1C1C1"
+            color={isLightTheme ? '#404040' : '#c1c1c1'}
             style={{ marginRight: 15 }}
           />
           <TextInput
             placeholder="Search"
-            placeholderTextColor="#C1C1C1"
+            placeholderTextColor={isLightTheme ? '#404040' : '#c1c1c1'}
             value={search}
             onChangeText={setSearch}
-            style={styles.searchField}
+            style={isLightTheme ? styles.lightSearchField : styles.darkSearchField}
           />
         </View>
       </View>
@@ -135,7 +139,12 @@ function SearchScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  lightContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+  },
+  darkContainer: {
     flex: 1,
     backgroundColor: "#000",
     alignItems: "center",
@@ -149,7 +158,18 @@ const styles = StyleSheet.create({
     width: 280,
     marginBottom: 10,
   },
-  searchBox: {
+  lightSearchBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingHorizontal: 16,
+    backgroundColor: "#e6e6e6",
+    borderRadius: 20,
+    width: "85%",
+    height: 60,
+    marginBottom: 20,
+  },
+  darkSearchBox: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -160,7 +180,13 @@ const styles = StyleSheet.create({
     height: 60,
     marginBottom: 20,
   },
-  searchField: {
+  lightSearchField: {
+    height: "100%",
+    flex: 1,
+    color: "#000",
+    fontSize: 18,
+  },
+  darkSearchField: {
     height: "100%",
     flex: 1,
     color: "#FFF",
@@ -172,7 +198,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingBottom: 20,
   },
-  mainContentText: {
+  lightMainContentText: {
+    fontSize: 25,
+    fontWeight: "500",
+    color: "#000",
+    textAlign: "center",
+    paddingHorizontal: 20,
+  },
+  darkMainContentText: {
     fontSize: 25,
     fontWeight: "500",
     color: "#FFF",

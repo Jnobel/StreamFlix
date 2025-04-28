@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 import { TMDB_API_KEY, BASE_URL } from "../constants";
 
@@ -38,6 +39,9 @@ function StreamingProviders({ id, mediaType }: Props) {
   const toggleCollapsed = (key: keyof typeof collapsed) => {
     setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
   };
+
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
 
   useEffect(() => {
     const controller = new AbortController();
@@ -77,7 +81,7 @@ function StreamingProviders({ id, mediaType }: Props) {
     return (
       <View style={styles.row}>
         <TouchableOpacity onPress={() => toggleCollapsed(collapsedKey!)}>
-          <Text style={styles.label}>
+          <Text style={isLightTheme ? styles.lightLabel : styles.darkLabel}>
             {label} {isCollapsed ? "▲" : "▼"}
           </Text>
         </TouchableOpacity>
@@ -117,7 +121,13 @@ const styles = StyleSheet.create({
   row: {
     marginBottom: 10,
   },
-  label: {
+  lightLabel: {
+    color: "#000",
+    fontWeight: "600",
+    marginBottom: 4,
+    fontSize: 16,
+  },
+  darkLabel: {
     color: "#FFF",
     fontWeight: "600",
     marginBottom: 4,

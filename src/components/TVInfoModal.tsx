@@ -1,6 +1,6 @@
 // src/components/TVInfoModal.tsx
 
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, StyleSheet, Image, ScrollView, useColorScheme } from "react-native";
 import { AntDesign as AntDesignIcon } from "@expo/vector-icons";
 
 import TVShow from "../types/TVShow";
@@ -17,8 +17,11 @@ function TVInfoModal({ show }: { show: TVShow }) {
     ? `${show.vote_average.toFixed(1)}/10`
     : "Unrated";
 
+    // Check if user prefers Light over Dark Theme
+    const isLightTheme = useColorScheme() === "light";
+
   return (
-    <View style={styles.container}>
+    <View style={isLightTheme ? styles.lightContainer : styles.darkContainer}>
       <ScrollView
         contentContainerStyle={{ paddingBottom: 30 }}
         showsVerticalScrollIndicator={false}
@@ -27,8 +30,8 @@ function TVInfoModal({ show }: { show: TVShow }) {
           {show.poster_path ? (
             <Image style={styles.image} source={{ uri: imageSrc }} />
           ) : (
-            <View style={styles.viewAlt}>
-              <Text style={styles.textAlt}>{show.name}</Text>
+            <View style={isLightTheme ? styles.lightViewAlt : styles.darkViewAlt}>
+              <Text style={isLightTheme ? styles.lightTextAlt : styles.darkTextAlt}>{show.name}</Text>
             </View>
           )}
 
@@ -37,23 +40,23 @@ function TVInfoModal({ show }: { show: TVShow }) {
               adjustsFontSizeToFit
               numberOfLines={2}
               ellipsizeMode="clip"
-              style={styles.title}
+              style={isLightTheme ? styles.lightTitle : styles.darkTitle}
             >
               {show.name}
             </Text>
 
             <View style={styles.subtitlesRow}>
-              <Text style={styles.subtitle}>{releaseYear}</Text>
+              <Text style={isLightTheme ? styles.lightSubtitle : styles.darkSubtitle}>{releaseYear}</Text>
               <AntDesignIcon
                 name="like1"
                 size={12}
                 color="#C1C1C1"
                 style={{ marginRight: 2 }}
               />
-              <Text style={styles.subtitle}>{rating}</Text>
+              <Text style={isLightTheme ? styles.lightSubtitle : styles.darkSubtitle}>{rating}</Text>
             </View>
 
-            <Text style={styles.overview} numberOfLines={4}>
+            <Text style={isLightTheme ? styles.lightOverview : styles.darkOverview} numberOfLines={4}>
               {show.overview || "No description available."}
             </Text>
           </View>
@@ -68,7 +71,17 @@ function TVInfoModal({ show }: { show: TVShow }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  lightContainer: {
+    position: "absolute",
+    backgroundColor: "#fff",
+    bottom: 0,
+    width: "100%",
+    maxHeight: "90%",
+    borderTopRightRadius: 15,
+    borderTopLeftRadius: 15,
+    padding: 15,
+  },
+  darkContainer: {
     position: "absolute",
     backgroundColor: "#252525",
     bottom: 0,
@@ -78,16 +91,21 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     padding: 15,
   },
+  topRow: {
+    flexDirection: "row",
+    marginBottom: 12,
+  },
   infosContainer: {
     marginLeft: 10,
     marginBottom: 5,
     width: "65%",
   },
-  topRow: {
-    flexDirection: "row",
-    marginBottom: 12,
+  lightTitle: {
+    fontSize: 30,
+    fontWeight: "700",
+    color: "#000",
   },
-  title: {
+  darkTitle: {
     fontSize: 30,
     fontWeight: "700",
     color: "#FFF",
@@ -98,13 +116,25 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginBottom: 6,
   },
-  subtitle: {
+  lightSubtitle: {
+    color: "#454545",
+    marginRight: 12,
+    fontSize: 14,
+    fontWeight: "800",
+  },
+  darkSubtitle: {
     color: "#C1C1C1",
     marginRight: 12,
     fontSize: 14,
     fontWeight: "800",
   },
-  overview: {
+  lightOverview: {
+    color: "#5e5e5e",
+    fontSize: 14,
+    fontWeight: "500",
+    maxHeight: 80,
+  },
+  darkOverview: {
     color: "#C1C1C1",
     fontSize: 14,
     fontWeight: "500",
@@ -115,13 +145,29 @@ const styles = StyleSheet.create({
     width: 122,
     borderRadius: 5,
   },
-  textAlt: {
+  lightTextAlt: {
+    color: "#000",
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "400",
+  },
+  darkTextAlt: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 18,
     fontWeight: "400",
   },
-  viewAlt: {
+  lightViewAlt: {
+    height: 182,
+    width: 122,
+    padding: 2,
+    borderColor: "#000",
+    borderWidth: 3,
+    borderRadius: 10,
+    backgroundColor: "#313131",
+    justifyContent: "center",
+  },
+  darkViewAlt: {
     height: 182,
     width: 122,
     padding: 2,

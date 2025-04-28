@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   LayoutChangeEvent,
+  useColorScheme
 } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { TMDB_API_KEY } from "../constants";
@@ -24,6 +25,9 @@ function Credits({
   const scrollPosition = useRef(0);
   const [contentWidth, setContentWidth] = useState(0);
   const [scrollViewWidth, setScrollViewWidth] = useState(0);
+
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
 
   useEffect(() => {
     const controller = new AbortController();
@@ -62,7 +66,7 @@ function Credits({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Starring:</Text>
+      <Text style={isLightTheme ? styles.lightTitle : styles.darkTitle}>Starring:</Text>
       <View style={styles.scrollWrapper}>
         <TouchableOpacity onPress={() => scrollBy("left")} style={styles.arrow}>
           <Ionicons name="chevron-back" size={24} color="#FFF" />
@@ -96,7 +100,14 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 8,
   },
-  title: {
+  lightTitle: {
+    color: "#000",
+    fontWeight: "bold",
+    fontSize: 18,
+    marginLeft: 12,
+    marginBottom: 6,
+  },
+  darkTitle: {
     color: "#FFF",
     fontWeight: "bold",
     fontSize: 18,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { ScrollView, StyleSheet, Image, View } from "react-native"
+import { ScrollView, StyleSheet, Image, View, useColorScheme } from "react-native"
 import { Foundation as FoundationIcon } from "@expo/vector-icons"
 import { TMDB_API_KEY, BASE_URL } from "../constants"; // Adjust path if needed
 import Movie from "../types/Movie"
@@ -14,6 +14,9 @@ function HomeScreen() {
     const [popularTV, setPopularTV] = useState<TVShow[]>([]);
     const [topRatedTV, setTopRatedTV] = useState<TVShow[]>([]);
     const controller = new AbortController()
+
+    // Check if user prefers Light over Dark Theme
+    const isLightTheme = useColorScheme() === "light";
 
     useEffect(() => {
         searchMovies()
@@ -58,7 +61,7 @@ function HomeScreen() {
 };
 
     return (
-        <View style={styles.container}>
+        <View style={isLightTheme ? styles.lightContainer : styles.darkContainer}>
             <View style={styles.mainContent}>
                 <View style={styles.image}>
                     <Image
@@ -100,11 +103,16 @@ function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    darkContainer: {
         flex: 1,
         backgroundColor: "#000",
         alignItems: "center",
     },
+    lightContainer: {
+      flex: 1,
+      backgroundColor: "#fff",
+      alignItems: "center",
+  },
     scrollView: {
         marginLeft: 20,
         bottom: "20%",

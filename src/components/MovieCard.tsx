@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  useColorScheme
 } from "react-native";
 import Modal from "react-native-modal"; // ✅ Gesture-safe modal
 
@@ -22,6 +23,9 @@ function MovieCard({
 }) {
   const imageSrc = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const [visible, setVisible] = useState(false);
+
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
 
   return (
     <>
@@ -41,12 +45,12 @@ function MovieCard({
         <View style={styles.movieCard}>
           {movie.poster_path ? (
             <Image
-              style={[{ height, width }, styles.image]}
+              style={[{ height, width }, isLightTheme ? styles.lightImage : styles.darkImage]}
               source={{ uri: imageSrc }}
             />
           ) : (
-            <View style={[{ height, width }, styles.viewAlt]}>
-              <Text style={styles.textAlt}>{movie.title}</Text>
+            <View style={[{ height, width }, isLightTheme ? styles.lightViewAlt : styles.darkViewAlt]}>
+              <Text style={isLightTheme ? styles.lightTextAlt : styles.darkTextAlt}>{movie.title}</Text>
             </View>
           )}
         </View>
@@ -63,18 +67,37 @@ const styles = StyleSheet.create({
   movieCard: {
     marginVertical: 14,
   },
-  image: {
+  lightImage: {
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "#e6e6e6",
+  },
+  darkImage: {
     borderRadius: 10,
     borderWidth: 2,
     borderColor: "#252525",
   },
-  textAlt: {
+  lightTextAlt: {
+    color: "#000",
+    textAlign: "center",
+    fontSize: 25,
+    fontWeight: "400",
+  },
+  darkTextAlt: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 25,
     fontWeight: "400",
   },
-  viewAlt: {
+  lightViewAlt: {
+    padding: 2,
+    borderColor: "#000",
+    borderWidth: 4,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  darkViewAlt: {
     padding: 2,
     borderColor: "#FFF",
     borderWidth: 4,

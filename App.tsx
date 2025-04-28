@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, useColorScheme } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -41,6 +41,9 @@ function AnimatedTabIcon({
 }
 
 export default function App() {
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
+
   return (
     <NavigationContainer>
       <SafeAreaView style={{ flex: 1 }}>
@@ -54,7 +57,7 @@ export default function App() {
             tabBarActiveTintColor: "turquoise",
             tabBarStyle: {
               height: "7%",
-              backgroundColor: "#000",
+              backgroundColor: isLightTheme ? "#fff" : "#000",
               position: "absolute",
               borderTopWidth: 0,
             },

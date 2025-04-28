@@ -6,11 +6,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   Modal,
+  useColorScheme
 } from "react-native";
 import CastMember from "../types/CastMember";
 
 function CastMemberCard({ castMember }: { castMember: CastMember }) {
   const [visible, setVisible] = useState(false);
+
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
 
   const imageUrl = castMember?.profile_path
     ? `https://image.tmdb.org/t/p/w185${castMember.profile_path}`
@@ -20,13 +24,13 @@ function CastMemberCard({ castMember }: { castMember: CastMember }) {
     <>
       {/* Card */}
       <TouchableOpacity onPress={() => setVisible(true)}>
-        <View style={styles.card}>
+        <View style={isLightTheme ? styles.lightCard : styles.darkCard}>
           <Image
             source={{ uri: imageUrl }}
-            style={styles.image}
+            style={isLightTheme ? styles.lightImage : styles.darkImage}
             resizeMode="cover"
           />
-          <Text style={styles.name} numberOfLines={1}>
+          <Text style={isLightTheme ? styles.lightName : styles.darkName} numberOfLines={1}>
             {castMember.name}
           </Text>
         </View>
@@ -40,17 +44,17 @@ function CastMemberCard({ castMember }: { castMember: CastMember }) {
         onRequestClose={() => setVisible(false)}
       >
         <View style={styles.modalBackdrop}>
-          <View style={styles.modalContent}>
+          <View style={isLightTheme ? styles.lightModalContent : styles.darkModalContent}>
             <Image
               source={{ uri: imageUrl }}
               style={styles.modalImage}
               resizeMode="cover"
             />
-            <Text style={styles.modalName}>{castMember.name}</Text>
-            <Text style={styles.modalCharacter}>
+            <Text style={isLightTheme ? styles.lightModalName : styles.darkModalName}>{castMember.name}</Text>
+            <Text style={isLightTheme ? styles.lightModalCharacter : styles.darkModalCharacter}>
               Character: {castMember.character || "N/A"}
             </Text>
-            <Text style={styles.modalMeta}>
+            <Text style={isLightTheme ? styles.lightModalMeta : styles.darkModalMeta}>
               Popularity: {castMember.popularity?.toFixed(1) || "N/A"}
             </Text>
             <TouchableOpacity onPress={() => setVisible(false)}>
@@ -64,7 +68,16 @@ function CastMemberCard({ castMember }: { castMember: CastMember }) {
 }
 
 const styles = StyleSheet.create({
-  card: {
+  lightCard: {
+    width: 100,
+    height: 140,
+    alignItems: "center",
+    marginRight: 10,
+    borderRadius: 6,
+    overflow: "hidden",
+    backgroundColor: "#e6e6e6",
+  },
+  darkCard: {
     width: 100,
     height: 140,
     alignItems: "center",
@@ -73,14 +86,27 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: "#2a2a2a",
   },
-  image: {
+  lightImage: {
+    width: 80,
+    height: 100,
+    borderRadius: 6,
+    backgroundColor: "#ccc",
+    marginBottom: 6,
+  },
+  darkImage: {
     width: 80,
     height: 100,
     borderRadius: 6,
     backgroundColor: "#444",
     marginBottom: 6,
   },
-  name: {
+  lightName: {
+    color: "#000",
+    fontSize: 12,
+    textAlign: "center",
+    paddingHorizontal: 4,
+  },
+  darkName: {
     color: "#FFF",
     fontSize: 12,
     textAlign: "center",
@@ -92,7 +118,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modalContent: {
+  lightModalContent: {
+    backgroundColor: "#ddd",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    width: 250,
+  },
+  darkModalContent: {
     backgroundColor: "#333",
     padding: 20,
     borderRadius: 10,
@@ -105,18 +138,34 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
   },
-  modalName: {
+  lightModalName: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "700",
+    textAlign: "center",
+  },
+  darkModalName: {
     color: "#FFF",
     fontSize: 18,
     fontWeight: "700",
     textAlign: "center",
   },
-  modalCharacter: {
+  lightModalCharacter: {
+    color: "#333",
+    fontSize: 14,
+    marginTop: 8,
+  },
+  darkModalCharacter: {
     color: "#CCC",
     fontSize: 14,
     marginTop: 8,
   },
-  modalMeta: {
+  lightModalMeta: {
+    color: "#666",
+    fontSize: 12,
+    marginTop: 4,
+  },
+  darkModalMeta: {
     color: "#888",
     fontSize: 12,
     marginTop: 4,

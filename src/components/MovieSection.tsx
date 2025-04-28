@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, FlatList } from "react-native"
+import { StyleSheet, Text, View, FlatList, useColorScheme } from "react-native"
 import Movie from "../types/Movie"
 import MovieCard from "./MovieCard"
 
 function MovieSection({ movies, sectionTitle }: { movies: Movie[], sectionTitle: string }) {
+    // Check if user prefers Light over Dark Theme
+    const isLightTheme = useColorScheme() === "light";
+
     return (
         <View style={styles.section}>
-            <Text style={styles.sectionTitle}>
+            <Text style={isLightTheme ? styles.lightSectionTitle : styles.darkSectionTitle}>
                 {sectionTitle}
             </Text>
 
@@ -33,7 +36,12 @@ const styles = StyleSheet.create({
     section: {
         height: 260,
     },
-    sectionTitle: {
+    lightSectionTitle: {
+        fontSize: 22,
+        fontWeight: "500",
+        color: "#000"
+    },
+    darkSectionTitle: {
         fontSize: 22,
         fontWeight: "500",
         color: "#FFF"

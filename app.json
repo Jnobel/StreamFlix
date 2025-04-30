@@ -5,7 +5,11 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+<<<<<<< HEAD
     "userInterfaceStyle": "automatic",  
+=======
+    "userInterfaceStyle": "automatic",
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -18,19 +22,30 @@
       "**/*"
     ],
     "ios": {
+<<<<<<< HEAD
       "supportsTablet": true,
       "userInterfaceStyle": "automatic"  
+=======
+      "supportsTablet": true
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
+<<<<<<< HEAD
       },
       "userInterfaceStyle": "automatic"  
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "userInterfaceStyle": "automatic"  
+=======
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
     }
   }
 }

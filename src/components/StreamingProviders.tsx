@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// src/components/StreamingProviders.tsx
+
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
 import { useEffect, useState } from "react";
 import {
   View,
@@ -5,9 +10,15 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+<<<<<<< HEAD
 } from "react-native";
 import { TMDB_API_KEY, BASE_URL } from "../constants";
 import { useTheme } from "@react-navigation/native";
+=======
+  useColorScheme,
+} from "react-native";
+import { TMDB_API_KEY, BASE_URL } from "../constants";
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
 
 interface Provider {
   logo_path: string;
@@ -34,12 +45,21 @@ function StreamingProviders({ id, mediaType }: Props) {
     free: false,
   });
 
+<<<<<<< HEAD
   const { colors } = useTheme(); // ✅ Theme hook
 
+=======
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
   const toggleCollapsed = (key: keyof typeof collapsed) => {
     setCollapsed((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+<<<<<<< HEAD
+=======
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
+
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
   useEffect(() => {
     const controller = new AbortController();
 
@@ -78,7 +98,11 @@ function StreamingProviders({ id, mediaType }: Props) {
     return (
       <View style={styles.row}>
         <TouchableOpacity onPress={() => toggleCollapsed(collapsedKey!)}>
+<<<<<<< HEAD
           <Text style={[styles.label, { color: colors.text }]}>
+=======
+          <Text style={isLightTheme ? styles.lightLabel : styles.darkLabel}>
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
             {label} {isCollapsed ? "▲" : "▼"}
           </Text>
         </TouchableOpacity>
@@ -118,7 +142,18 @@ const styles = StyleSheet.create({
   row: {
     marginBottom: 10,
   },
+<<<<<<< HEAD
   label: {
+=======
+  lightLabel: {
+    color: "#000",
+    fontWeight: "600",
+    marginBottom: 4,
+    fontSize: 16,
+  },
+  darkLabel: {
+    color: "#FFF",
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
     fontWeight: "600",
     marginBottom: 4,
     fontSize: 16,
@@ -140,4 +175,7 @@ const styles = StyleSheet.create({
 export default StreamingProviders;
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033

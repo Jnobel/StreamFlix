@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   LayoutChangeEvent,
+<<<<<<< HEAD
 } from "react-native";
 import { useEffect, useState, useRef } from "react";
 import { useTheme } from "@react-navigation/native";
@@ -13,6 +14,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { TMDB_API_KEY } from "../constants";
 import CastMemberCard from "./CastMemberCard";
 import CastMember from "../types/CastMember";
+=======
+  useColorScheme
+} from "react-native";
+import { useEffect, useState, useRef } from "react";
+import { TMDB_API_KEY } from "../constants";
+import CastMemberCard from "./CastMemberCard";
+import CastMember from "../types/CastMember";
+import { Ionicons } from "@expo/vector-icons";
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
 
 function MovieCredits({ movieId }: { movieId: number }) {
   const [cast, setCast] = useState<CastMember[]>([]);
@@ -20,7 +30,13 @@ function MovieCredits({ movieId }: { movieId: number }) {
   const scrollPosition = useRef(0);
   const [contentWidth, setContentWidth] = useState(0);
   const [scrollViewWidth, setScrollViewWidth] = useState(0);
+<<<<<<< HEAD
   const { colors } = useTheme(); // ✅ Theme-aware colors
+=======
+
+  // Check if user prefers Light over Dark Theme
+  const isLightTheme = useColorScheme() === "light";
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
 
   useEffect(() => {
     const controller = new AbortController();
@@ -60,12 +76,20 @@ function MovieCredits({ movieId }: { movieId: number }) {
 
   return (
     <View style={styles.container}>
+<<<<<<< HEAD
       <Text style={[styles.title, { color: colors.text }]}>Starring:</Text>
 
       <View style={styles.scrollWrapper}>
         {/* ⬅️ Left Arrow */}
         <TouchableOpacity onPress={() => scrollBy("left")} style={styles.arrow}>
           <Ionicons name="chevron-back" size={24} color={colors.text} />
+=======
+      <Text style={isLightTheme ? styles.lightTitle : styles.darkTitle}>Starring:</Text>
+      <View style={styles.scrollWrapper}>
+        {/* ⬅️ Left Arrow */}
+        <TouchableOpacity onPress={() => scrollBy("left")} style={styles.arrow}>
+          <Ionicons name="chevron-back" size={24} color="#FFF" />
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
         </TouchableOpacity>
 
         {/* Cast Scroll Row */}
@@ -87,7 +111,11 @@ function MovieCredits({ movieId }: { movieId: number }) {
 
         {/* ➡️ Right Arrow */}
         <TouchableOpacity onPress={() => scrollBy("right")} style={styles.arrow}>
+<<<<<<< HEAD
           <Ionicons name="chevron-forward" size={24} color={colors.text} />
+=======
+          <Ionicons name="chevron-forward" size={24} color="#FFF" />
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
         </TouchableOpacity>
       </View>
     </View>
@@ -98,7 +126,19 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 8,
   },
+<<<<<<< HEAD
   title: {
+=======
+  lightTitle: {
+    color: "#000",
+    fontWeight: "bold",
+    fontSize: 18,
+    marginLeft: 12,
+    marginBottom: 6,
+  },
+  darkTitle: {
+    color: "#FFF",
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
     fontWeight: "bold",
     fontSize: 18,
     marginLeft: 12,
@@ -130,3 +170,7 @@ export default MovieCredits;
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033

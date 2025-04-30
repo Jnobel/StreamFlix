@@ -8,10 +8,17 @@
     "web": "expo start --web"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
+    "@expo/vector-icons": "^14.0.2",
+    "@react-navigation/bottom-tabs": "*",
+    "@react-navigation/native": "*",
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
     "expo": "~52.0.46",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-native": "0.76.9",
+<<<<<<< HEAD
     "@expo/vector-icons": "^14.0.2",
     "react-native-modal": "*",
     "react-native-paper": "4.9.2",
@@ -20,6 +27,14 @@
     "@react-navigation/native": "*",
     "@react-navigation/bottom-tabs": "*",
     "react-native-safe-area-context": "4.12.0"
+=======
+    "react-native-dotenv": "^3.4.11",
+    "react-native-modal": "*",
+    "react-native-paper": "4.9.2",
+    "react-native-reanimated": "~3.16.1",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0"
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -27,4 +42,8 @@
     "typescript": "^5.3.3"
   },
   "private": true
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 88731896620bdf31ecae74031d8f5c1a4deac033

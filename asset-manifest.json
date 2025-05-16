@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.js": "/StreamFlix/static/js/main.37b9b53e.js",
+    "static/js/872.9f7311fa.js": "/StreamFlix/static/js/872.9f7311fa.js",
+    "static/media/StreamFlix+.png": "/StreamFlix/static/media/StreamFlix+.1ca721072ea38aa1941a.png",
+    "static/media/Ionicons.ttf": "/StreamFlix/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
+    "static/media/AntDesign.ttf": "/StreamFlix/static/media/AntDesign.163adab9dbd7cb1ed12a.ttf",
+    "favicon.ico": "/StreamFlix/favicon.ico",
+    "index.html": "/StreamFlix/index.html",
+    "favicon-32.png": "/StreamFlix/favicon-32.png",
+    "favicon-16.png": "/StreamFlix/favicon-16.png",
+    "serve.json": "/StreamFlix/serve.json",
+    "manifest.json": "/StreamFlix/manifest.json",
+    "main.37b9b53e.js.map": "/StreamFlix/static/js/main.37b9b53e.js.map",
+    "872.9f7311fa.js.map": "/StreamFlix/static/js/872.9f7311fa.js.map"
+  },
+  "entrypoints": [
+    "static/js/872.9f7311fa.js",
+    "static/js/main.37b9b53e.js"
+  ]
+}
